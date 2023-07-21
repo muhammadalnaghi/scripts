@@ -9,8 +9,8 @@ progName=$(basename $0)
 # postgresVersion=14
 domain=localdomain
 # repmgr_conf=/etc/repmgr/$postgresVersion/repmgr.conf
-# pgData=/var/lib/pgsql/$postgresVersion/data
-# postgresConf=/var/lib/pgsql/$postgresVersion/data/postgresql.conf
+# pgData=/pgdata/$postgresVersion/data
+# postgresConf=/pgdata/$postgresVersion/data/postgresql.conf
 # postgresHome=/var/lib/pgsql/$postgresVersion
 # postgresBin=/usr/pgsql-$postgresVersion/bin
 password=PutYourPasswordHere
@@ -40,8 +40,8 @@ done
 
 ### Building Variables according to inputs ###
 repmgr_conf=/etc/repmgr/$postgresVersion/repmgr.conf
-pgData=/var/lib/pgsql/$postgresVersion/data
-postgresConf=/var/lib/pgsql/$postgresVersion/data/postgresql.conf
+pgData=/pgdata/$postgresVersion/data
+postgresConf=/pgdata/$postgresVersion/data/postgresql.conf
 postgresHome=/var/lib/pgsql/$postgresVersion
 postgresBin=/usr/pgsql-$postgresVersion/bin
 
