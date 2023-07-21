@@ -1,3 +1,8 @@
+##############################################
+# PostgreSQL configuration                   #
+# by Karsten Lenz dbi services sa 04.29.2022 #
+##############################################
+
 #!/bin/bash
 
 echo "PostgreSQL Configuration"
@@ -29,7 +34,7 @@ do
 done
 
 # create ssl certificate and ssl key
-openssl req -new -newkey rsa:4096 -nodes -x509 -subj "/C=CH/ST=DBAAS/L=ZUERICH/O=Dis/CN=www.dbi-services.com" -keyout /var/lib/pgsql/14/data/ssl/pgsql.key -out /var/lib/pgsql/14/data/ssl/pgsql.crt
+openssl req -new -newkey rsa:4096 -nodes -x509 -subj "/C=CH/ST=DBAAS/L=ZUERICH/O=Dis/CN=www.dbi-services.com" -keyout /pgdata/ssl/pgsql.key -out /pgdata/ssl/pgsql.crt
 
 # define parameters
 rootdir=/opt/pgsql/config
@@ -70,9 +75,11 @@ psql -c "alter system set max_worker_processes = '$max_worker_processes';"
 psql -c "alter system set max_parallel_workers = '$max_parallel_workers';"
 psql -c "alter system set max_parallel_workers_per_gather = '$max_parallel_workers_per_gather';"
 psql -c "alter system set max_parallel_maintenance_workers = '$max_parallel_maintenance_workers';"
-psql -c "alter system set ssl_cert_file = '/var/lib/pgsql/14/data/ssl/pgsql.crt';"
-psql -c "alter system set ssl_key_file = '/var/lib/pgsql/14/data/ssl/pgsql.key';"
+psql -c "alter system set ssl_cert_file = '/pgdata/ssl/pgsql.crt';"
+psql -c "alter system set ssl_key_file = '/pgdata/ssl/pgsql.key';"
 psql -c "alter system set ssl = on;"
 psql -c "alter system set ssl_ciphers = 'HIGH';"
 psql -c "alter system set ssl_min_protocol_version = 'TLSv1.2';"
+psql -c "alter system set shared_preload_libraries = pg_stat_statements;"
 sudo service postgresql-$VERSION restart
+exit 
