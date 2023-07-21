@@ -75,6 +75,6 @@ psql -c "alter system set ssl_key_file = '/pgdata/ssl/pgsql.key';"
 psql -c "alter system set ssl = on;"
 psql -c "alter system set ssl_ciphers = 'HIGH';"
 psql -c "alter system set ssl_min_protocol_version = 'TLSv1.2';"
-psql -c "alter system set shared_preload_libraries = repmgr;"
+psql -c "alter system set shared_preload_libraries = pg_stat_statements;"
 sudo service postgresql-$VERSION restart
 exit 
